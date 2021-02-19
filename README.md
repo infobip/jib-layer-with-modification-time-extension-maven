@@ -16,10 +16,10 @@
 timestamps set to `1970-01-01T00:00:01Z`. This is caused due to JIB plugin's 
 [reproducibility feature](https://github.com/GoogleContainerTools/jib/blob/master/docs/faq.md#why-is-my-image-created-48-years-ago) 
 and is a good practice for most use cases, but causes problems for our public-facing web services, because it messes up `Last-Modified` headers.
-When hosting resources, Spring MVC can read file modification date (or artifact modification date) and use it to answer 
-to client's `If-Modified-Since` header. Without this information, browser caching can work incorrectly or less efficiently.
+When hosting resources, Spring MVC can read file modification timestamp and use it to answer to client's `If-Modified-Since` header 
+(works with bundled archives as well). Without this information, browser caching can work incorrectly or less efficiently.
 
-While modification date can be set using a plugin property `filesModificationTime`, it has some drawbacks:
+While modification time can be set using a plugin property `filesModificationTime`, it has some drawbacks:
 - it can be set only in `all-or-nothing` principle, forcing you to choose between seamless browser caching support and 
   Docker layer caching. Usually we only need one or two files/libraries to have modified time set.
 - it can not be set to take the current time, but rather needs to be passed the time as a property. Additionally, it 
@@ -27,17 +27,17 @@ While modification date can be set using a plugin property `filesModificationTim
   Maven profiles.
 
 This extension aims to achieve the best of both worlds, by enabling users to define which files they want to move from
-standard layers (that have modified date set to JIB's default) to a special layer that has last modified time set to 
+standard layers (that have modification time set to JIB's default) to a special layer that has last modified time set to 
 build time.
 
 This extension is opinionated in a way that it only allows moving the files into a single new layer. Keep in mind that 
-changing modification time also changes the layer hash and makes it irreproducible. Therefore, files affected by this
-extension should be kept to a minimum and only include the files which are part of the project using this extension.
+changing modification time also changes the layer hash and makes it irreproducible. Therefore, number of files affected 
+by this extension should be kept to a minimum and only include the files which are a part of the project.
 
 ## Usage <a name="usage"></a>
 
 The plugin will:
-- Remove files matching the filter from layers and put them in a final layer called `layerWithModificationDate`
+- Remove files matching the filter from layers and put them in a final layer called `layerWithModificationTime`
 - Remove an original layer if it is empty after the files were moved
 
 Here is an example of adding this plugin to a project's plugin management:
