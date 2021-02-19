@@ -1,6 +1,16 @@
 # Layer With Modification Time (LWMT) JIB Extension
 
-### Purpose
+## Contents
+1. [Purpose](#purpose)
+2. [Usage](#usage)
+3. [Example](#example)
+4. [Interesting reads](#reads)
+5. [Requirements](#requirements)
+6. [Contributing](#contributing)
+7. [License](#license)
+
+
+## Purpose <a name="purpose"></a>
 
 [JIB's](https://github.com/GoogleContainerTools/jib) default layer packaging process causes all files to have their 
 timestamps set to `1970-01-01T00:00:01Z`. This is caused due to JIB plugin's 
@@ -24,7 +34,7 @@ This extension is opinionated in a way that it only allows moving the files into
 changing modification time also changes the layer hash and makes it irreproducible. Therefore, files affected by this
 extension should be kept to a minimum and only include the files which are part of the project using this extension.
 
-### Usage
+## Usage <a name="usage"></a>
 
 The plugin will:
 - Remove files matching the filter from layers and put them in a final layer called `layerWithModificationDate`
@@ -78,7 +88,7 @@ Here is an example of adding this plugin to a project's plugin management:
 </build>
 ```
 
-#### Example
+## Example <a name="example"></a>
 
 If we had a layers organized like this:
 
@@ -123,8 +133,22 @@ while running the plugin with filter `**/f.file` would result in:
     - f.file
 ``` 
 
-### Interesting reads
+## Interesting reads <a name="reads"></a>
 - [JIB FAQ on reproducible builds](https://github.com/GoogleContainerTools/jib/blob/master/docs/faq.md#why-is-my-image-created-48-years-ago)
 - [Reproducible builds](https://reproducible-builds.org/)
 - [GitHub discussion](https://github.com/GoogleContainerTools/jib/issues/2021)
 
+## Requirements: <a name="requirements"></a>
+
+- Java 11
+- Maven
+
+## Contributing <a name="contributing"></a>
+
+If you have an idea for a new feature or want to report a bug please use the issue tracker.
+
+Pull requests are welcome!
+
+## License <a name="license"></a>
+
+This library is licensed under the [Apache License, Version 2.0](/LICENSE).

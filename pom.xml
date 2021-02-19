@@ -11,7 +11,7 @@
 	<name>JIB Layer With Modification Time Extension - Maven plugin</name>
 
 	<description>
-		JIB extension for creating a layer that has modification time set for all files within it.
+		JIB extension for selectively setting file modification timestamps to build time.
 	</description>
 
 	<organization>
