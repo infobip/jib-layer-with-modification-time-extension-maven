@@ -4,7 +4,7 @@
 
 	<groupId>com.infobip.jib</groupId>
 	<artifactId>jib-layer-with-modification-time-extension-maven</artifactId>
-	<version>1.0.1</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>JIB Layer With Modification Time Extension - Maven plugin</name>
@@ -44,7 +44,7 @@
 		<developerConnection>
 			scm:git:git@github.com:infobip/jib-layer-with-modification-time-extension-maven.git
 		</developerConnection>
-		<tag>jib-layer-with-modification-time-extension-maven-1.0.1</tag>
+		<tag>HEAD</tag>
 	</scm>
 
 	<properties>
